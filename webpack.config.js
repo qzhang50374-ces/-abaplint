@@ -14,6 +14,7 @@ module.exports = ({mode} = {mode: "development"}) => ({
   output: {
     path: path.join(__dirname, "docs"),
     filename: "[name].bundle.js",
+    publicPath: mode === "production" ? "/-abaplint/" : "/",
     globalObject: "self",
   },
   devServer: {
