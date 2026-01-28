@@ -18,8 +18,8 @@
   <script>
     self.MonacoEnvironment = {
       getWorkerUrl: (moduleId, label) => (label === 'json')
-        ? './json.worker.bundle.js'
-        : './editor.worker.bundle.js'
+        ? 'json.worker.bundle.js'
+        : 'editor.worker.bundle.js'
     }
   </script>
 </body>

@@ -12,7 +12,7 @@ module.exports = ({mode} = {mode: "development"}) => ({
   },
   mode,
   output: {
-    path: path.join(__dirname, "build"),
+    path: path.join(__dirname, "docs"),
     filename: "[name].bundle.js",
     globalObject: "self",
   },
