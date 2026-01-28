@@ -1,0 +1,4 @@
+build
+build_tsc
+cypress/screenshots
+cypress/videos
