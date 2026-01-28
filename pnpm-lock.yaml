@@ -9,57 +9,57 @@ importers:
   .:
     dependencies:
       '@phosphor/commands':
-        specifier: ^1.7.2
+        specifier: 1.7.2
         version: 1.7.2
       '@phosphor/default-theme':
-        specifier: ^0.1.8
+        specifier: 0.1.8
         version: 0.1.8
       '@phosphor/dragdrop':
-        specifier: ^1.4.1
+        specifier: 1.4.1
         version: 1.4.1
       '@phosphor/messaging':
-        specifier: ^1.3.0
+        specifier: 1.3.0
         version: 1.3.0
       '@phosphor/widgets':
-        specifier: ^1.9.3
+        specifier: 1.9.3
         version: 1.9.3
       buffer:
-        specifier: ^6.0.3
+        specifier: 6.0.3
         version: 6.0.3
       crypto-browserify:
-        specifier: ^3.12.1
+        specifier: 3.12.1
         version: 3.12.1
       monaco-editor:
-        specifier: ^0.52.2
+        specifier: 0.52.2
         version: 0.52.2
       stream-browserify:
-        specifier: ^3.0.0
+        specifier: 3.0.0
         version: 3.0.0
       vscode-languageserver-types:
-        specifier: ^3.17.5
+        specifier: 3.17.5
         version: 3.17.5
     devDependencies:
       '@abaplint/core':
-        specifier: ^2.115.17
-        version: 2.115.17
+        specifier: 2.115.18
+        version: 2.115.18
       '@abaplint/monaco':
-        specifier: ^2.115.17
-        version: 2.115.17
+        specifier: 2.115.18
+        version: 2.115.18
       css-loader:
-        specifier: ^7.1.2
+        specifier: 7.1.2
         version: 7.1.2(webpack@5.104.1)
       file-loader:
-        specifier: ^6.2.0
+        specifier: 6.2.0
         version: 6.2.0(webpack@5.104.1)
       html-webpack-plugin:
         specifier: ^5.6.5
-        version: 5.6.6(webpack@5.104.1)
+        version: 5.6.5(webpack@5.104.1)
       less:
         specifier: ^4.4.2
-        version: 4.5.1
+        version: 4.4.2
       less-loader:
         specifier: 12.3.0
-        version: 12.3.0(less@4.5.1)(webpack@5.104.1)
+        version: 12.3.0(less@4.4.2)(webpack@5.104.1)
       path-browserify:
         specifier: ^1.0.1
         version: 1.0.1
@@ -67,22 +67,22 @@ importers:
         specifier: ^6.1.2
         version: 6.1.2
       style-loader:
-        specifier: ^4.0.0
+        specifier: 4.0.0
         version: 4.0.0(webpack@5.104.1)
       ts-loader:
-        specifier: ^9.5.4
+        specifier: 9.5.4
         version: 9.5.4(typescript@5.9.3)(webpack@5.104.1)
       typescript:
-        specifier: ^5.9.3
+        specifier: 5.9.3
         version: 5.9.3
       url-loader:
-        specifier: ^4.1.1
+        specifier: 4.1.1
         version: 4.1.1(file-loader@6.2.0(webpack@5.104.1))(webpack@5.104.1)
       webpack:
-        specifier: ^5.104.1
+        specifier: 5.104.1
         version: 5.104.1(webpack-cli@6.0.1)
       webpack-cli:
-        specifier: ^6.0.1
+        specifier: 6.0.1
         version: 6.0.1(webpack-dev-server@5.2.3)(webpack@5.104.1)
       webpack-dev-server:
         specifier: ^5.2.3
@@ -90,12 +90,12 @@ importers:
 
 packages:
 
-  '@abaplint/core@2.115.17':
-    resolution: {integrity: sha512-oPCR5LzESJ1o3Lj/dTlEvMPYx6APiA5fUA/eaCfHmecNBcFeVEl1c/3Ddz7NfAERQYIj0aOlM+Ze3Ow4Bd9vgQ==}
+  '@abaplint/core@2.115.18':
+    resolution: {integrity: sha512-V9DBaGlr7bKMfO9W03T0gevydbBAYSCiXE3ZGkB2jfEsT7Mgh+bDdWtb+0TPVdqOyGtZCGyeVVlZ/EjYUl/nDg==}
     engines: {node: '>=12.0.0'}
 
-  '@abaplint/monaco@2.115.17':
-    resolution: {integrity: sha512-POaZtBR06k3JSTGSk1f7Ja8wL+ANYTjO2fvwtmLpjjI9vQOymAyEtKz0kJyQ/78trP7xsQhldMMBzFEcML41JA==}
+  '@abaplint/monaco@2.115.18':
+    resolution: {integrity: sha512-BTrEaa3Hw0fxRB9vVB2xR/b3JoH7JtnkvqKGKZhO+sW+PbbSAx1JK6gg6hZ8MECVqDT80l7yDPaHgqed+2lrKg==}
 
   '@discoveryjs/json-ext@0.6.3':
     resolution: {integrity: sha512-4B4OijXeVNOPZlYA2oEwWOTkzyltLao+xbotHQeqN++Rv27Y6s818+n2Qkp8q+Fxhn0t/5lA5X1Mxktud8eayQ==}
@@ -1088,8 +1088,8 @@ packages:
     engines: {node: '>=12'}
     hasBin: true
 
-  html-webpack-plugin@5.6.6:
-    resolution: {integrity: sha512-bLjW01UTrvoWTJQL5LsMRo1SypHW80FTm12OJRSnr3v6YHNhfe+1r0MYUZJMACxnCHURVnBWRwAsWs2yPU9Ezw==}
+  html-webpack-plugin@5.6.5:
+    resolution: {integrity: sha512-4xynFbKNNk+WlzXeQQ+6YYsH2g7mpfPszQZUi3ovKlj+pDmngQ7vRXjrrmGROabmKwyQkcgcX5hqfOwHbFmK5g==}
     engines: {node: '>=10.13.0'}
     peerDependencies:
       '@rspack/core': 0.x || 1.x
@@ -1284,8 +1284,8 @@ packages:
       webpack:
         optional: true
 
-  less@4.5.1:
-    resolution: {integrity: sha512-UKgI3/KON4u6ngSsnDADsUERqhZknsVZbnuzlRZXLQCmfC/MDld42fTydUE9B+Mla1AL6SJ/Pp6SlEFi/AVGfw==}
+  less@4.4.2:
+    resolution: {integrity: sha512-j1n1IuTX1VQjIy3tT7cyGbX7nvQOsFLoIqobZv4ttI5axP923gA44zUj6miiA6R5Aoms4sEGVIIcucXUbRI14g==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -2068,15 +2068,15 @@ packages:
 
 snapshots:
 
-  '@abaplint/core@2.115.17':
+  '@abaplint/core@2.115.18':
     dependencies:
       fast-xml-parser: 5.3.3
       json5: 2.2.3
       vscode-languageserver-types: 3.17.5
 
-  '@abaplint/monaco@2.115.17':
+  '@abaplint/monaco@2.115.18':
     dependencies:
-      '@abaplint/core': 2.115.17
+      '@abaplint/core': 2.115.18
 
   '@discoveryjs/json-ext@0.6.3': {}
 
@@ -3277,7 +3277,7 @@ snapshots:
       relateurl: 0.2.7
       terser: 5.46.0
 
-  html-webpack-plugin@5.6.6(webpack@5.104.1):
+  html-webpack-plugin@5.6.5(webpack@5.104.1):
     dependencies:
       '@types/html-minifier-terser': 6.1.0
       html-minifier-terser: 6.1.0
@@ -3438,13 +3438,13 @@ snapshots:
       picocolors: 1.1.1
       shell-quote: 1.8.3
 
-  less-loader@12.3.0(less@4.5.1)(webpack@5.104.1):
+  less-loader@12.3.0(less@4.4.2)(webpack@5.104.1):
     dependencies:
-      less: 4.5.1
+      less: 4.4.2
     optionalDependencies:
       webpack: 5.104.1(webpack-cli@6.0.1)
 
-  less@4.5.1:
+  less@4.4.2:
     dependencies:
       copy-anything: 2.0.6
       parse-node-version: 1.0.1

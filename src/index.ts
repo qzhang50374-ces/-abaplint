@@ -13,7 +13,6 @@ import "../node_modules/@phosphor/default-theme/style/index.css";
 import "./index.less";
 import "../public/img/favicon-16x16.png";
 import "../public/img/favicon-32x32.png";
-import schema from "../../../packages/core/scripts/schema.json";
 import * as monaco from "monaco-editor";
 import {BoxPanel, DockPanel, Widget} from "@phosphor/widgets";
 import {WelcomeWidget, ProblemsWidget} from "./widgets";
@@ -60,7 +59,7 @@ function registerMonacoSettings(reg: IRegistry) {
     schemas: [{
       uri: "https://schema.abaplint.org/schema.json",
       fileMatch: ["abaplint.json"],
-      schema: schema,
+      schema: {},
     }],
   });
 }
