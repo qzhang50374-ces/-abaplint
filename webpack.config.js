@@ -28,15 +28,18 @@ module.exports = (env, argv) => {
       open: true,
       hot: true,
     },
-    resolve: {
-      fallback: {
-        "buffer": require.resolve("buffer/"),
-        "path": require.resolve("path-browserify"),
-        "stream": require.resolve("stream-browserify"),
-        "crypto": false,
-      },
-      extensions: [".js", ".ts", ".tsx"],
+  resolve: {
+    fallback: {
+      "buffer": require.resolve("buffer/"),
+      "path": require.resolve("path-browserify"),
+      "stream": require.resolve("stream-browserify"),
+      "crypto": false,
     },
+    extensions: [".js", ".ts", ".tsx"],
+    alias: {
+      "@abaplint/core": path.resolve(__dirname, "node_modules/@abaplint/core"),
+    },
+  },
     module: {
       rules: [
         {test: /\.css$/, use: ["style-loader", "css-loader"]},
@@ -65,13 +68,17 @@ module.exports = (env, argv) => {
         },
       ],
     },
-    plugins: [
-      new HtmlWebpackPlugin({
-        template: "public/index.html",
-      }),
-      new webpack.ProvidePlugin({
-        Buffer: ["buffer", "Buffer"],
-      }),
-    ],
+  optimization: {
+    usedExports: true,
+    sideEffects: true,
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "public/index.html",
+    }),
+    new webpack.ProvidePlugin({
+      Buffer: ["buffer", "Buffer"],
+    }),
+  ],
   };
 };
