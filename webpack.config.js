@@ -78,6 +78,15 @@ module.exports = (env, argv) => {
     concatenateModules: true,
     // 确保模块 ID 稳定
     moduleIds: 'deterministic',
+    // 配置 minimizer 保留类名，防止 @abaplint/core 的语法处理器类名冲突
+    minimizer: [
+      new (require('terser-webpack-plugin'))({
+        terserOptions: {
+          keep_classnames: true,  // 保留类名
+          keep_fnames: true,      // 保留函数名
+        },
+      }),
+    ],
   },
   plugins: [
     // HtmlWebpackPlugin temporarily disabled due to installation issues
