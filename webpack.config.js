@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
 const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = (env, argv) => {
   const mode = argv.mode || "development";
@@ -73,9 +73,10 @@ module.exports = (env, argv) => {
     sideEffects: true,
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: "public/index.html",
-    }),
+    // HtmlWebpackPlugin temporarily disabled due to installation issues
+    // new HtmlWebpackPlugin({
+    //   template: "public/index.html",
+    // }),
     new webpack.ProvidePlugin({
       Buffer: ["buffer", "Buffer"],
     }),
