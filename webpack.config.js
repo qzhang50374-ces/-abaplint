@@ -14,7 +14,7 @@ module.exports = (env, argv) => {
       "editor.worker": "monaco-editor/esm/vs/editor/editor.worker.js",
       "json.worker": "monaco-editor/esm/vs/language/json/json.worker.js",
     },
-    mode,
+    mode,npm run build
     output: {
       path: path.join(__dirname, "docs"),
       filename: "[name].bundle.js",

@@ -59,7 +59,7 @@ function registerMonacoSettings(reg: IRegistry) {
     schemas: [{
       uri: "https://schema.abaplint.org/schema.json",
       fileMatch: ["abaplint.json"],
-      schema: {},
+      schema: {},  // schema.json 不可用，使用空对象
     }],
   });
 }
