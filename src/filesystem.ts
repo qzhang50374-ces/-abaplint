@@ -89,22 +89,9 @@ export class FileSystem {
       "severity": "Error",
       "exclude": [".*\\.testclasses\\.abap$", ".*\\.locals_imp\\.abap$"]
     };
-    // check_syntax 规则 - 启用但忽略特定错误类型（表/组件找不到）
-    defaultConfig.rules["check_syntax"] = {
-      "severity": "Error",
-      "ignoreTableNotFound": true,      // 忽略 "Database table not found" 错误
-      "ignoreComponentNotFound": true,  // 忽略 "Component not found in structure" 错误
-      "ignoreUnknownType": true,        // 忽略 "Unknown type" 错误
-      "ignoreMethodNotFound": true,     // 忽略 "Method not found" 错误
-      "ignoreClassNotFound": true,      // 忽略 "Class not found" / "Unknown class" 错误
-      "ignoreInterfaceNotFound": true,  // 忽略 "Interface not found" / "Unknown interface" 错误
-      "ignoreTargetNotFound": true,     // 忽略 "not found, Target" 错误 (TEST-INJECTION 变量)
-      "ignoreNotObjectReference": true, // 忽略 "Not an object reference" 错误
-      "ignoreFindTopNotFound": true,    // 忽略 "not found, findTop" 错误 (TEST-INJECTION 变量)
-      "ignoreParameterNotExist": true,  // 忽略 "parameter does not exist" 错误
-      "ignoreNotTableType": true,       // 忽略 "not a table type" 错误
-      "ignoreMustBeSupplied": true      // 忽略 "must be supplied" 错误
-    };
+    // check_syntax 规则 - 禁用语法检查（因为很多 RAP/DDIC 类型在 playground 中不可用）
+    // 注意：@abaplint/core 的 check_syntax 规则不支持自定义忽略选项
+    defaultConfig.rules["check_syntax"] = false;
     // 禁用全局类方法间注释检查 - 与 abapdoc checkImplementation 冲突
     defaultConfig.rules["no_comments_between_methods"] = false;
 
@@ -130,19 +117,14 @@ export class FileSystem {
       "exclude": [".*\\.testclasses\\.abap$", ".*\\.locals_imp\\.abap$"]
     };
 
-    // abapdoc checks - 对测试类和本地类放宽（不强制 IF/LOOP 注释）
+    // abapdoc checks - 对测试类放宽
+    // 注意：@abaplint/core 的 abapdoc 规则只支持 checkLocal, classDefinition, interfaceDefinition, ignoreTestClasses
     defaultConfig.rules["abapdoc"] = {
-      severity: "Error",
-      checkLocal: true,
-      classDefinition: false,
-      interfaceDefinition: false,
-      ignoreTestClasses: true,
-      checkPrivate: true,
-      checkProtected: true,
-      checkImplementation: true,
-      checkStatements: false,      // 关闭 - 不强制 IF/LOOP/SELECT 等注释
-      checkSubrcHandling: false,   // 关闭 - 不强制 sy-subrc 处理注释
-      allowNormalComment: true,    // 允许普通注释（" 开头），不强制要求 "! 开头
+      severity: "Warning",
+      checkLocal: false,           // 不检查本地类的 abapdoc
+      classDefinition: false,      // 不强制类定义有 abapdoc
+      interfaceDefinition: false,  // 不强制接口定义有 abapdoc
+      ignoreTestClasses: true,     // 忽略测试类
     };
 
     // Add config file first so it's applied

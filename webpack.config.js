@@ -71,28 +71,22 @@ module.exports = (env, argv) => {
   optimization: {
     usedExports: true,
     sideEffects: true,
-    // 确保 @abaplint/core 不被拆分到多个 chunk，避免 "duplicate statement syntax handler" 错误
-    splitChunks: {
-      cacheGroups: {
-        // 将 @abaplint 相关模块打包到单独的 vendor chunk
-        abaplint: {
-          test: /[\\/]node_modules[\\/]@abaplint[\\/]/,
-          name: 'abaplint-vendor',
-          chunks: 'all',
-          enforce: true,
-          priority: 20,
+    // 完全禁用代码拆分，确保所有模块在单一上下文中初始化
+    splitChunks: false,
+    runtimeChunk: false,
+    // 启用模块连接（Scope Hoisting）减少模块边界
+    concatenateModules: true,
+    // 确保模块 ID 稳定
+    moduleIds: 'deterministic',
+    // 配置 minimizer 保留类名，防止 @abaplint/core 的语法处理器类名冲突
+    minimizer: [
+      new (require('terser-webpack-plugin'))({
+        terserOptions: {
+          keep_classnames: true,  // 保留类名
+          keep_fnames: true,      // 保留函数名
         },
-        // 其他 vendor 模块
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-          priority: 10,
-        },
-      },
-    },
-    // 确保运行时代码在单独的 chunk 中
-    runtimeChunk: 'single',
+      }),
+    ],
   },
   plugins: [
     // HtmlWebpackPlugin temporarily disabled due to installation issues
