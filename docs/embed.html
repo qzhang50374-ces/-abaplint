@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABAPLINT Playground - 嵌入版</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #1e1e1e;
+      color: #fff;
+      min-height: 100vh;
+    }
+    
+    .header {
+      background: #252526;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #3c3c3c;
+    }
+    
+    .header h1 {
+      font-size: 18px;
+      font-weight: 500;
+      color: #cccccc;
+    }
+    
+    .header a {
+      color: #007acc;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    
+    .header a:hover {
+      text-decoration: underline;
+    }
+    
+    .container {
+      width: 100%;
+      height: calc(100vh - 50px);
+    }
+    
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    /* 加载状态 */
+    .loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #333;
+      border-top-color: #007acc;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 15px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>ABAPLINT Playground</h1>
+    <a href="https://playground.abaplint.org/" target="_blank">打开官方 Playground ↗</a>
+  </div>
+  
+  <div class="container">
+    <!-- 使用官方 playground (稳定可靠) -->
+    <iframe 
+      src="https://playground.abaplint.org/" 
+      title="ABAPLINT Playground"
+      allow="clipboard-read; clipboard-write"
+      loading="lazy">
+    </iframe>
+  </div>
+</body>
+</html>
