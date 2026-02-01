@@ -132,20 +132,37 @@ module.exports = (env, argv) => {
       },
       // 运行时代码单独打包
       runtimeChunk: 'single',
-      // 配置压缩
+      // 配置压缩 - 对 @abaplint 模块保留类名防止 duplicate handler 错误
       minimizer: [
         new TerserPlugin({
           parallel: true,
+          // 排除 @abaplint 模块，不进行混淆
+          exclude: /[\\/]node_modules[\\/]@abaplint[\\/]/,
           terserOptions: {
             compress: {
               drop_console: isProduction,
               drop_debugger: isProduction,
               pure_funcs: isProduction ? ['console.log', 'console.info'] : [],
             },
+            mangle: true,
+            output: {
+              comments: false,
+            },
+          },
+          extractComments: false,
+        }),
+        // 对 @abaplint 模块使用保留类名的压缩
+        new TerserPlugin({
+          parallel: true,
+          include: /[\\/]node_modules[\\/]@abaplint[\\/]/,
+          terserOptions: {
+            compress: {
+              drop_console: isProduction,
+              drop_debugger: isProduction,
+            },
             mangle: {
-              // 只对 @abaplint 保留类名
-              keep_classnames: /^(InterfaceDeferred|ClassDeferred|Perform|Call|Move|Loop|Select|Registry|Config|MemoryFile|SyntaxLogic|ABAPFile|ABAPObject|LanguageServer|Issue|Position|Token|Identifier|SpaghettiScope|CurrentScope|TypedIdentifier|AbstractType|Version|Severity|ReferenceType|BuiltIn|Statements|Expressions|Structures|Nodes|Types|BasicTypes|Tokens|Objects)$/,
-              keep_fnames: false,
+              keep_classnames: true,
+              keep_fnames: true,
             },
             output: {
               comments: false,
