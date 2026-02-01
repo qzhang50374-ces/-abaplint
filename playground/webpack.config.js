@@ -31,6 +31,10 @@ module.exports = ({mode} = {mode: "development"}) => ({
       "crypto": false,
     },
     extensions: [".js", ".ts", ".tsx"],
+    alias: {
+      // 从根目录的 node_modules 解析 ajv
+      "ajv": path.resolve(__dirname, "../node_modules/ajv"),
+    },
   },
   module: {
     rules: [
