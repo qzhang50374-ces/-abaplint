@@ -93,72 +93,18 @@ module.exports = (env, argv) => {
       // 启用模块连接（Scope Hoisting）
       concatenateModules: true,
       moduleIds: 'deterministic',
-      // 智能代码分割
-      splitChunks: {
-        chunks: 'all',
-        maxInitialRequests: 25,
-        minSize: 20000,
-        cacheGroups: {
-          // @abaplint 相关模块打包到一起，避免 duplicate handler 问题
-          abaplint: {
-            test: /[\\/]node_modules[\\/]@abaplint[\\/]/,
-            name: 'abaplint',
-            chunks: 'all',
-            enforce: true,
-            priority: 30,
-          },
-          // Monaco Editor 核心
-          monacoCore: {
-            test: /[\\/]node_modules[\\/]monaco-editor[\\/]esm[\\/]vs[\\/](editor|base|platform)[\\/]/,
-            name: 'monaco-core',
-            chunks: 'all',
-            priority: 20,
-          },
-          // Monaco Editor 语言支持 (按需加载)
-          monacoLanguages: {
-            test: /[\\/]node_modules[\\/]monaco-editor[\\/]esm[\\/]vs[\\/]language[\\/]/,
-            name: 'monaco-languages',
-            chunks: 'async',
-            priority: 15,
-          },
-          // 其他 vendor
-          vendors: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-            priority: 10,
-          },
-        },
-      },
-      // 运行时代码单独打包
-      runtimeChunk: 'single',
-      // 配置压缩 - 对 @abaplint 模块保留类名防止 duplicate handler 错误
+      // 禁用代码分割 - 防止 @abaplint/core 模块初始化问题
+      splitChunks: false,
+      runtimeChunk: false,
+      // 配置压缩 - 保留所有类名防止 duplicate handler 错误
       minimizer: [
         new TerserPlugin({
           parallel: true,
-          // 排除 @abaplint 模块，不进行混淆
-          exclude: /[\\/]node_modules[\\/]@abaplint[\\/]/,
           terserOptions: {
             compress: {
               drop_console: isProduction,
               drop_debugger: isProduction,
               pure_funcs: isProduction ? ['console.log', 'console.info'] : [],
-            },
-            mangle: true,
-            output: {
-              comments: false,
-            },
-          },
-          extractComments: false,
-        }),
-        // 对 @abaplint 模块使用保留类名的压缩
-        new TerserPlugin({
-          parallel: true,
-          include: /[\\/]node_modules[\\/]@abaplint[\\/]/,
-          terserOptions: {
-            compress: {
-              drop_console: isProduction,
-              drop_debugger: isProduction,
             },
             mangle: {
               keep_classnames: true,
@@ -177,8 +123,7 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         template: "public/index.html",
         filename: "index.html",
-        chunks: ['runtime', 'abaplint', 'monaco-core', 'vendors', 'app'],
-        chunksSortMode: 'manual',
+        chunks: ['app'],
         minify: isProduction ? {
           removeComments: true,
           collapseWhitespace: true,

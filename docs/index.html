@@ -30,7 +30,7 @@
     }
     @keyframes spin {
       to { transform: rotate(360deg); }
-    }</style><script defer=defer src=/-abaplint/runtime.bundle.js></script><script defer=defer src=/-abaplint/abaplint.bundle.js></script><script defer=defer src=/-abaplint/monaco-core.bundle.js></script><script defer=defer src=/-abaplint/vendors.bundle.js></script><script defer=defer src=/-abaplint/app.bundle.js></script></head><body><div id=loading><div class=spinner></div><span>Loading ABAPLINT Playground...</span></div><script>// Monaco Editor Worker 配置
+    }</style><script defer=defer src=/-abaplint/app.bundle.js></script></head><body><div id=loading><div class=spinner></div><span>Loading ABAPLINT Playground...</span></div><script>// Monaco Editor Worker 配置
     self.MonacoEnvironment = {
       getWorkerUrl: function(moduleId, label) {
         const base = document.querySelector('script[src*="app"]')?.src?.replace(/app[^/]*\.js.*$/, '') || '/-abaplint/';
