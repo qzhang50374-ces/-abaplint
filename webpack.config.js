@@ -90,33 +90,14 @@ module.exports = (env, argv) => {
     optimization: {
       usedExports: true,
       sideEffects: true,
-      // 启用模块连接（Scope Hoisting）
+      // 启用模块连接
       concatenateModules: true,
       moduleIds: 'deterministic',
-      // 禁用代码分割 - 防止 @abaplint/core 模块初始化问题
+      // 禁用代码分割
       splitChunks: false,
       runtimeChunk: false,
-      // 配置压缩 - 保留所有类名防止 duplicate handler 错误
-      minimizer: [
-        new TerserPlugin({
-          parallel: true,
-          terserOptions: {
-            compress: {
-              drop_console: isProduction,
-              drop_debugger: isProduction,
-              pure_funcs: isProduction ? ['console.log', 'console.info'] : [],
-            },
-            mangle: {
-              keep_classnames: true,
-              keep_fnames: true,
-            },
-            output: {
-              comments: false,
-            },
-          },
-          extractComments: false,
-        }),
-      ],
+      // 完全禁用压缩来测试
+      minimize: false,
     },
     plugins: [
       // 自动生成 HTML 并注入脚本
