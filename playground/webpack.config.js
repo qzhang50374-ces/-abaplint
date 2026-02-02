@@ -32,8 +32,10 @@ module.exports = ({mode} = {mode: "development"}) => ({
     },
     extensions: [".js", ".ts", ".tsx"],
     alias: {
-      // 从根目录的 node_modules 解析 ajv
+      // 使用根目录的 ajv
       "ajv": path.resolve(__dirname, "../node_modules/ajv"),
+      // 忽略运行时的 schema-utils 验证
+      "schema-utils": false,
     },
   },
   module: {
