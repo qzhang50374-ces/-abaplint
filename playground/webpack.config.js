@@ -40,8 +40,32 @@ module.exports = ({mode} = {mode: "development"}) => ({
   },
   module: {
     rules: [
-      {test: /\.css$/, use: ["style-loader", "css-loader"]},
-      {test: /\.less$/, use: ["style-loader", "css-loader", "less-loader"]},
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: "style-loader",
+            options: {
+              // 使用简单的注入方式，避免运行时验证
+              injectType: "styleTag",
+            },
+          },
+          "css-loader",
+        ],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: "style-loader",
+            options: {
+              injectType: "styleTag",
+            },
+          },
+          "css-loader",
+          "less-loader",
+        ],
+      },
       {
         test: /\.png$/,
         include: /favicon/,
@@ -72,6 +96,10 @@ module.exports = ({mode} = {mode: "development"}) => ({
     }),
     new webpack.ProvidePlugin({
       Buffer: ["buffer", "Buffer"],
+    }),
+    // 忽略 schema-utils 的运行时验证
+    new webpack.IgnorePlugin({
+      resourceRegExp: /^schema-utils$/,
     }),
   ],
 });
