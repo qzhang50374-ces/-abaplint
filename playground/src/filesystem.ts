@@ -64,7 +64,14 @@ export class FileSystem {
     defaultConfig.rules["method_length"] = false;
     // 禁用前缀检查（保留 local_variable_names）
     defaultConfig.rules["no_prefixes"] = false;
-    defaultConfig.rules["method_parameter_names"] = false;
+    // 方法参数命名规则 - iv_, is_, it_, ev_, es_, et_, cv_, cs_, ct_, rv_, rs_, rt_
+    defaultConfig.rules["method_parameter_names"] = {
+      severity: "Error",
+      importing: "^i[vst]_.+$",    // iv_, is_, it_
+      exporting: "^e[vst]_.+$",    // ev_, es_, et_
+      changing: "^c[vst]_.+$",     // cv_, cs_, ct_
+      returning: "^r[vst]_.+$",    // rv_, rs_, rt_
+    };
     defaultConfig.rules["local_class_naming"] = false;
     // 禁用描述检查 - RAP 基类没有 XML 文件
     defaultConfig.rules["description_empty"] = false;
@@ -117,8 +124,13 @@ export class FileSystem {
     defaultConfig.rules["select_add_order_by"] = false;
     // 禁用 avoid_use - 允许 seam 等
     defaultConfig.rules["avoid_use"] = false;
-    // 禁用 local_variable_names - Clean ABAP 不需要 LV_ 前缀
-    defaultConfig.rules["local_variable_names"] = false;
+    // 局部变量命名规则 - lv_, ls_, lt_, lr_, lc_
+    defaultConfig.rules["local_variable_names"] = {
+      severity: "Error",
+      expectedData: "^l[vstr]_.+$",       // lv_, ls_, lt_, lr_
+      expectedConstant: "^lc_.+$",         // lc_
+      expectedFS: "^<l[st]_.+>$",          // <ls_*>, <lt_*>
+    };
     // omit_parameter_name - 对测试类(.testclasses.abap)和本地类(.locals_imp.abap)放宽
     defaultConfig.rules["omit_parameter_name"] = {
       "severity": "Warning",
@@ -139,7 +151,7 @@ export class FileSystem {
       ignoreTestClasses: true,
       checkPrivate: true,
       checkProtected: true,
-      checkImplementation: true,
+      checkImplementation: false,
       checkStatements: false,      // 关闭 - 不强制 IF/LOOP/SELECT 等注释
       checkSubrcHandling: false,   // 关闭 - 不强制 sy-subrc 处理注释
       allowNormalComment: true,    // 允许普通注释（" 开头），不强制要求 "! 开头
