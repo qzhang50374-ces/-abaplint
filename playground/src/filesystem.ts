@@ -143,6 +143,7 @@ export class FileSystem {
     };
 
     // abapdoc checks - 对测试类和本地类放宽（不强制 IF/LOOP 注释）
+    // globla_imp.abap 完全排除 abapdoc 检查（关闭 checkImplementation）
     defaultConfig.rules["abapdoc"] = {
       severity: "Error",
       checkLocal: true,
@@ -155,6 +156,7 @@ export class FileSystem {
       checkStatements: false,      // 关闭 - 不强制 IF/LOOP/SELECT 等注释
       checkSubrcHandling: false,   // 关闭 - 不强制 sy-subrc 处理注释
       allowNormalComment: true,    // 允许普通注释（" 开头），不强制要求 "! 开头
+      exclude: [".*\\.globla_imp\\.abap$"],  // globla_imp 排除 abapdoc 检查
     };
 
     // Add config file first so it's applied
@@ -244,7 +246,7 @@ ENDCLASS.`
 
     // Global implementation file (globla_imp)
     this.addFile(
-      "zfoo.clas.globla_imp.abap",
+      "zfoo.clas.global_imp.abap",
       `"! Paste your global implementation code here
 CLASS lcl_helper DEFINITION.
   PUBLIC SECTION.

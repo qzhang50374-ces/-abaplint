@@ -34,7 +34,7 @@ function main(): void {
   FileSystem.openFile("file:///abaplint.json");
   FileSystem.openFile("file:///zfoo.ddls.asddls");
   FileSystem.openFile("file:///zfoo.clas.locals_imp.abap");  // 本地类粘贴到这里
-  FileSystem.openFile("file:///zfoo.clas.globla_imp.abap");  // 全局实现类粘贴到这里
+  FileSystem.openFile("file:///zfoo.clas.global_imp.abap");  // 全局实现类粘贴到这里
   FileSystem.openFile("file:///zfoo.clas.testclasses.abap"); // 测试类粘贴到这里
 
   const left = new BoxPanel({direction: "top-to-bottom", spacing: 0});
