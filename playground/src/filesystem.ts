@@ -94,7 +94,7 @@ export class FileSystem {
     // parser_error 规则 - 排除测试类和本地类文件
     defaultConfig.rules["parser_error"] = {
       "severity": "Error",
-      "exclude": [".*\\.testclasses\\.abap$", ".*\\.locals_imp\\.abap$"]
+      "exclude": [".*\\.testclasses\\.abap$", ".*\\.locals_imp\\.abap$", ".*\\.globla_imp\\.abap$"]
     };
     // check_syntax 规则 - 启用但忽略特定错误类型（表/组件找不到）
     defaultConfig.rules["check_syntax"] = {
@@ -131,15 +131,15 @@ export class FileSystem {
       expectedConstant: "^lc_.+$",         // lc_
       expectedFS: "^<l[st]_.+>$",          // <ls_*>, <lt_*>
     };
-    // omit_parameter_name - 对测试类(.testclasses.abap)和本地类(.locals_imp.abap)放宽
+    // omit_parameter_name - 对测试类、本地类和全局实现类放宽
     defaultConfig.rules["omit_parameter_name"] = {
       "severity": "Warning",
-      "exclude": [".*\\.testclasses\\.abap$", ".*\\.locals_imp\\.abap$"]
+      "exclude": [".*\\.testclasses\\.abap$", ".*\\.locals_imp\\.abap$", ".*\\.globla_imp\\.abap$"]
     };
-    // superclass_final - 对测试类(.testclasses.abap)和本地类(.locals_imp.abap)放宽
+    // superclass_final - 对测试类、本地类和全局实现类放宽
     defaultConfig.rules["superclass_final"] = {
       "severity": "Warning",
-      "exclude": [".*\\.testclasses\\.abap$", ".*\\.locals_imp\\.abap$"]
+      "exclude": [".*\\.testclasses\\.abap$", ".*\\.locals_imp\\.abap$", ".*\\.globla_imp\\.abap$"]
     };
 
     // abapdoc checks - 对测试类和本地类放宽（不强制 IF/LOOP 注释）
@@ -151,7 +151,7 @@ export class FileSystem {
       ignoreTestClasses: true,
       checkPrivate: true,
       checkProtected: true,
-      checkImplementation: false,
+      checkImplementation: true,
       checkStatements: false,      // 关闭 - 不强制 IF/LOOP/SELECT 等注释
       checkSubrcHandling: false,   // 关闭 - 不强制 sy-subrc 处理注释
       allowNormalComment: true,    // 允许普通注释（" 开头），不强制要求 "! 开头
@@ -228,6 +228,24 @@ ENDCLASS.`
     this.addFile(
       "zfoo.clas.locals_imp.abap",
       `"! Paste your local class code here
+CLASS lcl_helper DEFINITION.
+  PUBLIC SECTION.
+    " Helper method declaration
+    METHODS do_something RETURNING VALUE(rv_result) TYPE string.
+ENDCLASS.
+
+CLASS lcl_helper IMPLEMENTATION.
+  " Helper method implementation
+  METHOD do_something.
+    rv_result = |Done|.
+  ENDMETHOD.
+ENDCLASS.`
+    );
+
+    // Global implementation file (globla_imp)
+    this.addFile(
+      "zfoo.clas.globla_imp.abap",
+      `"! Paste your global implementation code here
 CLASS lcl_helper DEFINITION.
   PUBLIC SECTION.
     " Helper method declaration
