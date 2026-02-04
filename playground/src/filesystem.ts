@@ -143,7 +143,8 @@ export class FileSystem {
     };
 
     // abapdoc checks - 对测试类和本地类放宽（不强制 IF/LOOP 注释）
-    // globla_imp.abap 完全排除 abapdoc 检查（关闭 checkImplementation）
+    // checkImplementation: false - 所有文件的 IMPLEMENTATION 部分不检查方法注释
+    // 仅检查 DEFINITION 部分的方法声明注释
     defaultConfig.rules["abapdoc"] = {
       severity: "Error",
       checkLocal: true,
@@ -152,11 +153,10 @@ export class FileSystem {
       ignoreTestClasses: true,
       checkPrivate: true,
       checkProtected: true,
-      checkImplementation: true,
+      checkImplementation: false,  // 关闭 - 不检查 IMPLEMENTATION 部分的方法注释
       checkStatements: false,      // 关闭 - 不强制 IF/LOOP/SELECT 等注释
       checkSubrcHandling: false,   // 关闭 - 不强制 sy-subrc 处理注释
       allowNormalComment: true,    // 允许普通注释（" 开头），不强制要求 "! 开头
-      exclude: [".*\\.globla_imp\\.abap$"],  // globla_imp 排除 abapdoc 检查
     };
 
     // Add config file first so it's applied
@@ -248,13 +248,13 @@ ENDCLASS.`
     this.addFile(
       "zfoo.clas.global_imp.abap",
       `"! Paste your global implementation code here
-CLASS lcl_helper DEFINITION.
+CLASS gcl_helper DEFINITION.
   PUBLIC SECTION.
     " Helper method declaration
     METHODS do_something RETURNING VALUE(rv_result) TYPE string.
 ENDCLASS.
 
-CLASS lcl_helper IMPLEMENTATION.
+CLASS gcl_helper IMPLEMENTATION.
   " Helper method implementation
   METHOD do_something.
     rv_result = |Done|.
