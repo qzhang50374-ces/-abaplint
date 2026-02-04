@@ -33,6 +33,19 @@ export class EditorWidget extends Widget {
     return this.model;
   }
 
+  public getEditor(): monaco.editor.IStandaloneCodeEditor | undefined {
+    return this.editor;
+  }
+
+  public revealPosition(line: number, column: number): void {
+    if (this.editor) {
+      const position = { lineNumber: line, column: column };
+      this.editor.setPosition(position);
+      this.editor.revealPositionInCenter(position);
+      this.editor.focus();
+    }
+  }
+
   public onCloseRequest(msg: Message) {
     super.onCloseRequest(msg);
     this.editor!.dispose();

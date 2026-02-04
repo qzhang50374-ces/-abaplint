@@ -101,10 +101,14 @@ export class ProblemsWidget extends Widget {
     fileStats.innerHTML = fileStatsHtml;
     
     // 问题列表
-    const input = document.createElement("tt");
+    const input = document.createElement("div");
+    input.style.cssText = "font-family: monospace;";
     for (const i of issues) {
-      const position = "[" + i.getStart().getRow() + ", " + i.getStart().getCol() + "]";
-      const path = monaco.Uri.parse(i.getFilename()).path;
+      const row = i.getStart().getRow();
+      const col = i.getStart().getCol();
+      const position = "[" + row + ", " + col + "]";
+      const filename = i.getFilename();
+      const path = monaco.Uri.parse(filename).path;
       const message = this.escape(i.getMessage());
       const severity = i.getSeverity();
       let color = "#d4d4d4";
@@ -119,8 +123,27 @@ export class ProblemsWidget extends Widget {
         color = "#3794ff";
         icon = "ℹ️ ";
       }
-      input.innerHTML = input.innerHTML + "<br>" +
-        `<span style="color: ${color};">${icon}${path}${position}: ${message}(${i.getKey()})</span>`;
+      
+      // 创建可点击的问题行
+      const problemLine = document.createElement("div");
+      problemLine.style.cssText = `color: ${color}; cursor: pointer; padding: 2px 8px; margin: 1px 0;`;
+      problemLine.innerHTML = `${icon}${path}${position}: ${message}(${i.getKey()})`;
+      problemLine.title = `Click to jump to ${path} line ${row}`;
+      
+      // 悬停效果
+      problemLine.onmouseenter = () => {
+        problemLine.style.backgroundColor = "#2a2d2e";
+      };
+      problemLine.onmouseleave = () => {
+        problemLine.style.backgroundColor = "";
+      };
+      
+      // 点击跳转
+      problemLine.onclick = () => {
+        FileSystem.openFileAtPosition(filename, row, col);
+      };
+      
+      input.appendChild(problemLine);
     }
     content.appendChild(input);
 

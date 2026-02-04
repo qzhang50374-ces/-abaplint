@@ -153,7 +153,7 @@ export class FileSystem {
       ignoreTestClasses: true,
       checkPrivate: true,
       checkProtected: true,
-      checkImplementation: false,  // 关闭 - 不检查 IMPLEMENTATION 部分的方法注释
+      checkImplementation: true,  // 关闭 - 不检查 IMPLEMENTATION 部分的方法注释
       checkStatements: false,      // 关闭 - 不强制 IF/LOOP/SELECT 等注释
       checkSubrcHandling: false,   // 关闭 - 不强制 sy-subrc 处理注释
       allowNormalComment: true,    // 允许普通注释（" 开头），不强制要求 "! 开头
@@ -315,6 +315,24 @@ ENDCLASS.`
         this.dock.addWidget(w);
         this.dock.activateWidget(w);
       }
+    }
+  }
+
+  public static openFileAtPosition(filename: string, line: number, column: number) {
+    const f = this.getFile(filename);
+    if (f) {
+      let editor = this.findEditor(f);
+      if (editor) {
+        this.dock.activateWidget(editor);
+      } else {
+        editor = new EditorWidget(f.getFilename(), f.getRaw());
+        this.dock.addWidget(editor);
+        this.dock.activateWidget(editor);
+      }
+      // 延迟跳转，确保编辑器已经渲染
+      setTimeout(() => {
+        editor?.revealPosition(line, column);
+      }, 100);
     }
   }
 
