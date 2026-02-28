@@ -62,6 +62,10 @@ export class FileSystem {
     // 禁用未知类型检查 - 避免 RAP 基类/DDIC 类型找不到的警告
     defaultConfig.rules["unknown_types"] = false;
     defaultConfig.rules["method_length"] = false;
+    defaultConfig.rules["no_inline_in_optional_branches"] = false;
+    defaultConfig.rules["prefer_returning_to_exporting"] = false;
+    defaultConfig.rules["check_comments"] = false;
+    defaultConfig.rules["change_if_to_case"] = false;
     // 禁用前缀检查（保留 local_variable_names）
     defaultConfig.rules["no_prefixes"] = false;
     // 方法参数命名规则 - iv_, is_, it_, ev_, es_, et_, cv_, cs_, ct_, rv_, rs_, rt_
